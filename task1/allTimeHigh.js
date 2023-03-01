@@ -28,4 +28,4 @@ export async function getAllTimeHigh(currency) {
   const toAth = calculateDifference(currentAth, currentPrice, "toAth");
   return { fromAth, toAth };
 }
-console.log(await getAllTimeHigh("bitcoin"));
+// console.log(await getAllTimeHigh("bitcoin"));
