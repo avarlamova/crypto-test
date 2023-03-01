@@ -6,7 +6,7 @@ import Link from "next/link";
 import styled from "styled-components";
 const inter = Inter({ subsets: ["latin"] });
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   padding: 4em;
   background: papayawhip;
 `;
