@@ -11,8 +11,9 @@ export async function fetchAth(currency) {
   return { currentPrice, currentAth };
 }
 
-export async function calculateAth(currency) {
-  const { currentPrice, currentAth } = await fetchAth(currency);
+//функция расчета
+export function calculateAth(currentPrice, currentAth) {
+  // const { currentPrice, currentAth } = await fetchAth(currency);
 
   const difference = currentAth - currentPrice;
 
