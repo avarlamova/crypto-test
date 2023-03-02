@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { CryptoCurrencyOptions, CurrencyOptions } from "../../types/types";
+import { CurrencyOption, CurrencyOptions } from "../../types/types";
 
 // type Option = {
 //   name: string;
@@ -7,16 +7,21 @@ import { CryptoCurrencyOptions, CurrencyOptions } from "../../types/types";
 // };
 
 type Options = {
-  options: CryptoCurrencyOptions | CurrencyOptions;
+  options: CurrencyOptions;
+  selectedOption: number;
   handleChange: (ev: any) => void;
 };
 
-const CustomSelect: FC<Options> = ({ options, handleChange }) => {
+const CustomSelect: FC<Options> = ({
+  options,
+  handleChange,
+  selectedOption,
+}) => {
   return (
-    <select onChange={handleChange}>
-      {options.map(({ name, id }) => (
-        <option value={id} key={id}>
-          {name}
+    <select value={selectedOption} onChange={handleChange}>
+      {options.map((option: CurrencyOption) => (
+        <option key={option.id} value={option.id}>
+          {option.name}
         </option>
       ))}
     </select>

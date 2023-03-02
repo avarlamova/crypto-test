@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import CustomSelect from "@/components/UI/CustomSelect";
 import useCurrencies from "@/hooks/useCurrencies";
-import { CryptoCurrencyOptions, CurrencyOptions } from "../../types/types";
+import { CurrencyOption, CurrencyOptions } from "../../types/types";
 
 type SelectProps = {
   label: string;
@@ -11,12 +11,13 @@ type SelectProps = {
 };
 
 const Converter = ({ label, value, onChange }: SelectProps) => {
-  const currencyOptions: CurrencyOptions = [{ name: "USD", id: 1 }];
-  const cryptocurrencyOptions: CryptoCurrencyOptions = useCurrencies();
+  const currencyOptions: CurrencyOptions = useCurrencies();
   const [amount, setAmount] = useState(1);
-  const [baseCurrencyId, setBaseCurrencyId] = useState(1);
-  const [baseCurrencySymbol, setBaseCurrencySymbol] = useState("");
-  const [targetCurrencyId, setTargetCurrencyId] = useState(1);
+  const [baseCurrencyId, setBaseCurrencyId] = useState<number>(1);
+  const [baseCurrencySymbol, setBaseCurrencySymbol] = useState<string>("BTC");
+  const [targetCurrencyId, setTargetCurrencyId] = useState<number>(3);
+  const [targetCurrencySymbol, setTargetCurrencySymbol] =
+    useState<string>("ETH");
 
   const handleAmountChange = (event: any) => {
     setAmount(event.target.value);
@@ -37,17 +38,25 @@ const Converter = ({ label, value, onChange }: SelectProps) => {
   const [result, setResult] = useState(0);
 
   useEffect(() => {
-    const baseCurrency = cryptocurrencyOptions.find(
-      (currency) => currency.id == baseCurrencyId
+    const baseCurrency = currencyOptions.find(
+      (currency: CurrencyOption) => currency.id == baseCurrencyId
     );
-    const baseCurrencyValue = baseCurrency?.values?.USD.price;
-    if (baseCurrencyValue) {
+    const baseCurrencyValue = baseCurrency?.value;
+
+    const targetCurrency = currencyOptions.find(
+      (currency: CurrencyOption) => currency.id == targetCurrencyId
+    );
+
+    const targetCurrencyValue = targetCurrency?.value;
+
+    if (baseCurrencyValue && targetCurrencyValue) {
       //TODO bigint issue!
-      const result = baseCurrencyValue * amount;
-      setResult(Number(result));
+      const result = (baseCurrencyValue / targetCurrencyValue) * amount;
       setBaseCurrencySymbol(baseCurrency?.symbol);
+      setTargetCurrencySymbol(targetCurrency?.symbol);
+      setResult(Number(result));
     }
-  }, [amount, baseCurrencyId]); // add targetCurrencyId when we have more than 1 target currency
+  }, [amount, baseCurrencyId, targetCurrencyId, currencyOptions]);
 
   return (
     <div>
@@ -55,16 +64,18 @@ const Converter = ({ label, value, onChange }: SelectProps) => {
       Amount
       <input value={amount} type="number" onChange={handleAmountChange}></input>
       <CustomSelect
-        options={cryptocurrencyOptions}
+        selectedOption={baseCurrencyId}
+        options={currencyOptions}
         handleChange={handleBaseCurrencyChange}
       />
       <button onClick={switchCurrencies}>Switch</button>
       <CustomSelect
         options={currencyOptions}
+        selectedOption={targetCurrencyId}
         handleChange={handleTargetCurrencyChange}
       />
       <span>
-        {amount} {baseCurrencySymbol} = {result} USD
+        {amount} {baseCurrencySymbol} = {result} {targetCurrencySymbol}
       </span>
     </div>
   );

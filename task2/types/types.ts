@@ -1,8 +1,15 @@
 export interface CurrencyOption {
   id: number;
   name: string;
+  value: number;
+  symbol: string;
 }
-export interface Option extends CurrencyOption {
+
+export type CurrencyOptions = CurrencyOption[];
+
+export interface FetchedCurrencyOption {
+  id: number;
+  name: string;
   rank: number;
   slug: string;
   symbol: string;
@@ -16,10 +23,6 @@ export interface Option extends CurrencyOption {
   lastUpdated: string;
   tokens: any[];
 }
-
-export type CryptoCurrencyOptions = Option[];
-export type CurrencyOptions = CurrencyOption[];
-
 export interface Values {
   USD: Usd;
 }
