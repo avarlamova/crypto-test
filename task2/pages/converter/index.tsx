@@ -12,15 +12,8 @@ import {
 } from "./styled";
 import NavBar from "@/components/UI/NavBar/NavBar";
 import CustomInput from "@/components/UI/CustomInput/CustomInput";
-import styled from "styled-components";
 
-type SelectProps = {
-  label: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-};
-
-const Converter = ({ label, value, onChange }: SelectProps) => {
+const Converter = () => {
   const { currencyOptions } = useCurrencies(false);
   const [amount, setAmount] = useState(1);
   const [baseCurrencyId, setBaseCurrencyId] = useState<number>(1);

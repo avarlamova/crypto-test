@@ -12,7 +12,7 @@ export async function fetchAth(currency: string) {
 }
 
 //функция расчета
-export function calculateAth(currentPrice: number, currentAth: number) {
+export const calculateAth = (currentPrice: number, currentAth: number) => {
   // const { currentPrice, currentAth } = await fetchAth(currency);
 
   const difference = +currentAth - +currentPrice;
@@ -23,4 +23,4 @@ export function calculateAth(currentPrice: number, currentAth: number) {
   const toAth = ((difference / currentPrice) * 100).toFixed(2);
 
   return { fromAth, toAth };
-}
+};

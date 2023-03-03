@@ -2,6 +2,7 @@ import { getAbbreviatedNumber } from "@/helpers/getAbbreviatedNumber";
 import { calculateAth } from "@/helpers/getAth";
 import { WatchlistCurrency, WatchlistCurrencyOptions } from "@/types/types";
 import React, { FC } from "react";
+import { StyledTable } from "./styled";
 
 type TableProps = {
   currencyOptions: WatchlistCurrencyOptions;
@@ -9,7 +10,7 @@ type TableProps = {
 
 const CurrenciesTable: FC<TableProps> = ({ currencyOptions }) => {
   return (
-    <table>
+    <StyledTable>
       <thead>
         <tr>
           <th>Name</th>
@@ -53,7 +54,7 @@ const CurrenciesTable: FC<TableProps> = ({ currencyOptions }) => {
             );
           })}
       </tbody>
-    </table>
+    </StyledTable>
   );
 };
 

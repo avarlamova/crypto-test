@@ -5,7 +5,6 @@ export const fetcherWithAth = (url: string) =>
     .then((response) => response.json())
     .then(async (data) => {
       const formattedData = data.data.map(async (el: any) => {
-        // TODO common logic
         return {
           id: el.id,
           name: el.name,
