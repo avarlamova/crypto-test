@@ -12,7 +12,7 @@ type SelectProps = {
 };
 
 const Converter = ({ label, value, onChange }: SelectProps) => {
-  const { currencyOptions } = useCurrencies();
+  const { currencyOptions } = useCurrencies(false);
   const [amount, setAmount] = useState(1);
   const [baseCurrencyId, setBaseCurrencyId] = useState<number>(1);
   const [baseCurrencySymbol, setBaseCurrencySymbol] = useState<string>("BTC");
@@ -52,11 +52,10 @@ const Converter = ({ label, value, onChange }: SelectProps) => {
       const targetCurrencyValue = targetCurrency?.value;
 
       if (baseCurrencyValue && targetCurrencyValue) {
-        //TODO bigint issue!
-        const result = (baseCurrencyValue / targetCurrencyValue) * amount;
+        const result = (+baseCurrencyValue / +targetCurrencyValue) * amount;
         setBaseCurrencySymbol(baseCurrency?.symbol);
         setTargetCurrencySymbol(targetCurrency?.symbol);
-        setResult(Number(result));
+        setResult(result);
       }
     }
   }, [amount, baseCurrencyId, targetCurrencyId, currencyOptions]);
