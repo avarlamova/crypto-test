@@ -16,6 +16,7 @@ export interface WatchlistCurrency extends CurrencyOption {
 }
 
 export type CurrencyOptions = CurrencyOption[] | [];
+export type WatchlistCurrencyOptions = WatchlistCurrency[] | [];
 
 export interface FetchedCurrencyOption {
   id: number;
