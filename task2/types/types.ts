@@ -5,7 +5,17 @@ export interface CurrencyOption {
   symbol: string;
 }
 
-export type CurrencyOptions = CurrencyOption[];
+export interface WatchlistCurrency extends CurrencyOption {
+  circulatingSupply: number;
+  category: string;
+  marketCap: number;
+  ath: {
+    currentPrice: number;
+    currentAth: number;
+  };
+}
+
+export type CurrencyOptions = CurrencyOption[] | [];
 
 export interface FetchedCurrencyOption {
   id: number;

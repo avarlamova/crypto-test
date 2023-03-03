@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { calculateAth } from "../../../task1/allTimeHigh";
 import useCurrencies from "@/hooks/useCurrencies";
-import { CurrencyOption, FetchedCurrencyOption } from "@/types/types";
+import { WatchlistCurrency, FetchedCurrencyOption } from "@/types/types";
 
 type TableProps = {
   label: string;
@@ -10,8 +10,9 @@ type TableProps = {
 };
 
 const CurrenciesTable = ({ label, value }: TableProps) => {
-  const currencies = useCurrencies();
-
+  const { currencyOptions, error } = useCurrencies();
+  const [isLoading, setLoading] = useState(false);
+  console.log(currencyOptions);
   //   useEffect(() => {
   //     const getData = async () => {
   //       const fileData = await Promise.all(
@@ -42,34 +43,30 @@ const CurrenciesTable = ({ label, value }: TableProps) => {
             </tr>
           </thead>
           <tbody>
-            {currencies.map(
-              ({
+            {currencyOptions.map((option: WatchlistCurrency) => {
+              const {
                 id,
                 name,
                 circulatingSupply,
+                marketCap,
                 category,
                 value,
-                marketCap,
                 ath,
-              }) => {
-                const { currentAth, currentPrice } = ath;
-                const { fromAth, toAth } = calculateAth(
-                  currentPrice,
-                  currentAth
-                );
-                return (
-                  <tr key={id}>
-                    <td>{name}</td>
-                    <td>{value}</td>
-                    <td>{circulatingSupply}</td>
-                    <td>{marketCap}</td>
-                    <td>{category}</td>
-                    <td>{fromAth}</td>
-                    <td>{toAth}</td>
-                  </tr>
-                );
-              }
-            )}
+              } = option;
+              const { currentAth, currentPrice } = ath;
+              const { fromAth, toAth } = calculateAth(currentPrice, currentAth);
+              return (
+                <tr key={id}>
+                  <td>{name}</td>
+                  <td>${value}</td>
+                  <td>{circulatingSupply}</td>
+                  <td>{marketCap}</td>
+                  <td>{category}</td>
+                  <td>{fromAth}</td>
+                  <td>{toAth}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </>
@@ -79,7 +76,13 @@ const CurrenciesTable = ({ label, value }: TableProps) => {
   return (
     <div>
       <Link href="/"> Back to homepage</Link>
-      <EditableTable />
+      {error ? (
+        error.message
+      ) : isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <EditableTable />
+      )}
     </div>
   );
 };

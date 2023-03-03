@@ -19,11 +19,12 @@ const CustomSelect: FC<Options> = ({
 }) => {
   return (
     <select value={selectedOption} onChange={handleChange}>
-      {options.map((option: CurrencyOption) => (
-        <option key={option.id} value={option.id}>
-          {option.name}
-        </option>
-      ))}
+      {options &&
+        options.map((option: CurrencyOption) => (
+          <option key={option.id} value={option.id}>
+            {option.name}
+          </option>
+        ))}
     </select>
   );
 };
