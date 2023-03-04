@@ -18,8 +18,8 @@ const CurrenciesTable: FC<TableProps> = ({ currencyOptions }) => {
           <th>Circulating Supply</th>
           <th>Market Cap</th>
           <th>Category</th>
-          <th>From ATH, %</th>
-          <th>To ATH,%</th>
+          <th>% from ATH</th>
+          <th>% to ATH,%</th>
         </tr>
       </thead>
       <tbody>
@@ -40,7 +40,6 @@ const CurrenciesTable: FC<TableProps> = ({ currencyOptions }) => {
             const { currentAth, currentPrice } = ath;
             const { fromAth, toAth } = calculateAth(currentPrice, currentAth);
             const abbreviatedPrice = getAbbreviatedNumber(value);
-
             return (
               <tr key={id}>
                 <td>{name}</td>

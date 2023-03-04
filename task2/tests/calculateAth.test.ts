@@ -18,4 +18,14 @@ describe("calculateAth", () => {
     expect(functionResult.fromAth).toBe("0.00");
     expect(functionResult.toAth).toBe("0.00");
   });
+
+  it("fromAth is close to 100", () => {
+    const functionResult = calculateAth(1, 650301);
+    expect(functionResult.fromAth).toBe("99.9998462");
+  });
+
+  it("toAth is close to 100", () => {
+    const functionResult = calculateAth(1.01, 2.018);
+    expect(functionResult.toAth).toBe("99.8019802");
+  });
 });

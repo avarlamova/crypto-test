@@ -3,12 +3,6 @@ import { CurrencyOption, CurrencyOptions } from "../../../types/types";
 import { StyledSelect, SelectWrapper } from "./styled";
 import Image from "next/image";
 
-// import { ReactComponent as SelectArrow } from
-// type Option = {
-//   name: string;
-//   id?: string;
-// };
-
 type Options = {
   options: CurrencyOptions;
   selectedOption: number;

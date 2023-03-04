@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import CustomSelect from "@/components/UI/CustomSelect/CustomSelect";
 import useCurrencies from "@/hooks/useCurrencies";
-import { CurrencyOption, CurrencyOptions } from "../../types/types";
-import { Wrapper, FlexWrapper } from "@/styles/styled";
+import { CurrencyOption } from "../../types/types";
+import { Wrapper } from "@/styles/styled";
 import {
   ConverterWrapper,
   SwitchButton,
@@ -23,7 +22,7 @@ const Converter = () => {
     useState<string>("ETH");
 
   const handleAmountChange = (event: any) => {
-    setAmount(+event.target.value);
+    setAmount(event.target.value);
   };
   const handleBaseCurrencyChange = (event: any) => {
     setBaseCurrencyId(event.target.value);
@@ -53,7 +52,7 @@ const Converter = () => {
 
       const targetCurrencyValue = targetCurrency?.value;
 
-      if (baseCurrencyValue && targetCurrencyValue) {
+      if (baseCurrencyValue && targetCurrencyValue && amount) {
         let result = (+baseCurrencyValue / +targetCurrencyValue) * amount;
         setBaseCurrencySymbol(baseCurrency?.symbol);
         setTargetCurrencySymbol(targetCurrency?.symbol);
@@ -64,6 +63,7 @@ const Converter = () => {
         } else {
           result = Math.floor(result);
         }
+
         setResult(result);
       }
     }
@@ -89,13 +89,15 @@ const Converter = () => {
           />
         </CurrenciesWrapper>
 
-        <OutputWrapper>
-          <span>
-            {amount} {baseCurrencySymbol}
-            {" = "}
-            {result} {targetCurrencySymbol}
-          </span>
-        </OutputWrapper>
+        {amount > 0 && (
+          <OutputWrapper>
+            <span>
+              {amount} {baseCurrencySymbol}
+              {" = "}
+              {result} {targetCurrencySymbol}
+            </span>
+          </OutputWrapper>
+        )}
       </ConverterWrapper>
     </Wrapper>
   );
