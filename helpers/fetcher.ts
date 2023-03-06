@@ -1,10 +1,11 @@
+import { FetchedCurrencyOption } from "./../types/types";
 import { fetchAth } from "./getAth";
 
 export const fetcherWithAth = (url: string) =>
   fetch(url)
     .then((response) => response.json())
     .then(async (data) => {
-      const formattedData = data.data.map(async (el: any) => {
+      const formattedData = data.data.map(async (el: FetchedCurrencyOption) => {
         return {
           id: el.id,
           name: el.name,
@@ -23,7 +24,7 @@ export const fetcher = (url: string) =>
   fetch(url)
     .then((response) => response.json())
     .then((data) =>
-      data.data.map((el: any) => {
+      data.data.map((el: FetchedCurrencyOption) => {
         return {
           id: el.id,
           name: el.name,

@@ -21,15 +21,19 @@ const Converter = () => {
   const [targetCurrencySymbol, setTargetCurrencySymbol] =
     useState<string>("ETH");
 
-  const handleAmountChange = (event: any) => {
-    setAmount(event.target.value);
+  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAmount(+event.target.value);
   };
-  const handleBaseCurrencyChange = (event: any) => {
-    setBaseCurrencyId(event.target.value);
+  const handleBaseCurrencyChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setBaseCurrencyId(+event.target.value);
   };
 
-  const handleTargetCurrencyChange = (event: any) => {
-    setTargetCurrencyId(event.target.value);
+  const handleTargetCurrencyChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setTargetCurrencyId(+event.target.value);
   };
 
   const switchCurrencies = () => {

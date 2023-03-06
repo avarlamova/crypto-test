@@ -3,7 +3,7 @@ import { InputWrapper, StyledInput } from "./styled";
 
 type InputProps = {
   amount: number;
-  handleAmountChange: any;
+  handleAmountChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const CustomInput: FC<InputProps> = ({ amount, handleAmountChange }) => {
