@@ -13,7 +13,7 @@ const CustomInput: FC<InputProps> = ({ amount, handleAmountChange }) => {
       <StyledInput
         placeholder="Enter amount"
         value={amount}
-        type="number"
+        type="text"
         onChange={handleAmountChange}
       />
     </InputWrapper>
